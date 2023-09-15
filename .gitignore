@@ -1,2 +1,5 @@
 /data
 /private
+.vscode
+.venv
+__pycache__
