@@ -8,11 +8,11 @@ from telegram.ext import (
     ContextTypes,
 )
 
-from logging import debug, error, warning, basicConfig, DEBUG
+from logging import debug, error, warning, basicConfig, DEBUG, WARNING
 from datetime import datetime
 
 
-basicConfig(level=DEBUG)
+basicConfig(level=WARNING)
 
 
 # Initialization
@@ -65,11 +65,12 @@ def main() -> None:
     # Message handlers
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
-    # Errors
+    # Error handlers
     app.add_error_handler(error)
 
     # Polling
     warning("Bot is currently polling.{}".format(str(datetime.now())))
+    app.run_polling(poll_interval=3)
 
 
 if __name__ == "__main__":
