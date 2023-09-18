@@ -1,4 +1,6 @@
 from typing import Final
+from os import getenv
+from datetime import datetime
 from telegram import Update
 from telegram.ext import (
     Application,
@@ -8,16 +10,27 @@ from telegram.ext import (
     ContextTypes,
 )
 
-from logging import debug, error, warning, basicConfig, DEBUG
-from datetime import datetime
+# Config for loading .env
+from dotenv import load_dotenv
+
+load_dotenv(
+    dotenv_path=".venv/.env"
+)  # Create your own .env file at .venv before running this script.
+
+# Config for logging
+from logging import error, warning, basicConfig, WARNING, DEBUG
+
+basicConfig(
+    filename="logs/events.log",
+    filemode="w",
+    format="%(name)s - %(levelname)s - %(message)s",
+    level=WARNING,
+)
 
 
-basicConfig(level=DEBUG)
-
-
-# Initialization
-TOKEN: Final[str] = "xxx"
-BOT_USERNAME: Final[str] = "The_Classmate_Bot"
+# Getting API token and username from .env
+TOKEN: Final[str] = getenv("api_token_telegrambot")
+BOT_USERNAME: Final[str] = getenv("username_telegrambot")
 
 
 # Commands
@@ -126,7 +139,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     text: str = update.message.text
     response: str = handle_response(text)
 
-    debug("User:{}, :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
+    warning("User:{}, :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
     await update.message.reply_text(response)
 
 
@@ -139,7 +152,7 @@ async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 def main() -> None:
-    warning("Bot is currently online.{}".format(str(datetime.now())))
+    warning("Bot is currently online-{}".format(str(datetime.now())))
 
     app = Application.builder().token(TOKEN).build()
 
@@ -171,7 +184,7 @@ def main() -> None:
     app.add_error_handler(error)
 
     # Polling
-    warning("Bot is currently polling.{}".format(str(datetime.now())))
+    warning("Bot is currently polling-{}".format(str(datetime.now())))
     app.run_polling(poll_interval=3)
 
 
