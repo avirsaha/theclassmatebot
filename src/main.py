@@ -131,11 +131,13 @@ async def leave_class_command(
 async def open_source_command(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
-    await update.message.reply_text("This feature is under development")
+    with open("bot_responses/open_source.txt", "r") as file:
+        await update.message.reply_text(file.read())
 
 
 async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("This feature is under development")
+    with open("bot_responses/commands.txt", "r") as file:
+        await update.message.reply_text(file.read())
 
 
 async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -197,7 +199,7 @@ def main() -> None:
     app.add_handler(CommandHandler("open_source", open_source_command))
     app.add_handler(CommandHandler("commands", commands_command))
     app.add_handler(CommandHandler("feedback", feedback_command))
-    app.add_handler(CommandHandler("enquary", enquary_command))
+    app.add_handler(CommandHandler("enquiry", enquary_command))
     app.add_handler(CommandHandler("dev", dev_command))
 
     # Message handlers

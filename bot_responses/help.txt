@@ -1,3 +1,38 @@
-this is help TEXT
-this is help text
-this is help text
+Welcome to The Classmate Bot!
+
+This bot simplifies your learning journey. 
+It helps you create classes, share documents, access files anytime, and collaborate instantly. 
+Say goodbye to waiting and lost files.
+
+Control the bot by sending the following commands:
+    
+    Profile commands:
+    /activate: Start recording.
+    /myprofile: Shows yor current profile.
+    /deactivate: Pause recording.
+    /delete: Remove recordings.
+
+    Class commands:
+    /my_class: Check class status.
+    /create_class: Set up a class.
+    /delete_class: Remove a class.
+    /join_class: Join a class.
+    /leave_class: Exit a class.
+
+    Data commands:
+    /contribution: Share materials.
+    /fetchname: Fetch by name.
+    /fetchdate: Retrieve by date.
+    /fetchrange: Get by date-range.
+   
+    Utility commands:
+    /help: Get assistance.
+    /commands: List of commands.
+    /feedback: Share your thoughts.
+    /enquiry: Ask questions.
+    /open_source: Learn how it works.
+    /dev: Access developer tools.
+
+type /commands for a comprehensive list of all commands and what they do.
+
+Explore these commands for a better experience with The Classmate Bot! Need help? Just ask.

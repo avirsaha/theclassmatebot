@@ -18,5 +18,11 @@
 __version__ = "0.1.0-alpha"
 __all__ = []
 
-
 import pyodbc
+
+
+def connection(username: str, address: str, passwd: str, database: str = None) -> None:
+    pass
+
+
+# def search_record()

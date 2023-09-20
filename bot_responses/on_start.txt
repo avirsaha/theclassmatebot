@@ -1,0 +1,4 @@
+Welcome to The Classmate Bot
+Instantly access study materials, collaborate with classmates, and enhance your academic journey.
+Type /help or /commands for any further information.
+Thank you for choosing The Classmate Bot.
