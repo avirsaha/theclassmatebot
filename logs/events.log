@@ -1,2 +1,53 @@
-root - WARNING - Bot is currently online-2023-09-18 09:48:45.698268
-root - WARNING - Bot is currently polling-2023-09-18 09:48:45.748493
+root - WARNING - Bot is currently online-2023-09-20 12:46:13.922038
+root - WARNING - Bot is currently polling-2023-09-20 12:46:14.082065
+telegram.ext.Application - ERROR - An error was raised and an uncaught error was raised while handling the error with an error_handler.
+Traceback (most recent call last):
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1184, in process_update
+    await coroutine
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_basehandler.py", line 141, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Aviraj_python\theclassmatebot\src\main.py", line 61, in start_command
+    await update.message.reply_text(file.read())
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\_message.py", line 1092, in reply_text
+    return await self.get_bot().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 2613, in send_message
+    return await super().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\_bot.py", line 394, in decorator
+    result = await func(self, *args, **kwargs)  # skipcq: PYL-E1102
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\_bot.py", line 820, in send_message
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 517, in _send_message
+    result = await super()._send_message(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\_bot.py", line 572, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\_bot.py", line 482, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 335, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\_bot.py", line 510, in _do_post
+    return await request.post(
+           ^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 168, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 325, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Message text is empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1740, in process_error
+    await callback(update, context)
+  File "e:\Aviraj_python\theclassmatebot\src\main.py", line 170, in error
+    error(
+TypeError: error() missing 1 required positional argument: 'context'
