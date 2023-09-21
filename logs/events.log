@@ -1,2 +1,23 @@
-root - WARNING - Bot is currently online-2023-09-20 14:17:06.618421
-root - WARNING - Bot is currently polling-2023-09-20 14:17:06.643422
+
+root - WARNING - Bot is currently online-2023-09-21 16:01:41.997857
+root - WARNING - Bot is currently polling-2023-09-21 16:01:42.026538
+root - WARNING - Bot is currently online-2023-09-21 16:02:01.363456
+root - WARNING - Bot is currently polling-2023-09-21 16:02:01.395762
+root - WARNING - Bot is currently offline-2023-09-21 16:02:05.542129
+asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Application:6544496390:update_fetcher' coro=<Application._update_fetcher() running at E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py:1101> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+root - WARNING - Bot is currently online-2023-09-21 16:16:59.175666
+root - WARNING - Bot is currently polling-2023-09-21 16:16:59.190578
+root - WARNING - User:6310472157 :Hi-2023-09-21 16:17:20.085330
+asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Application:6544496390:update_fetcher' coro=<Application._update_fetcher() running at E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py:1101> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+root - WARNING - Bot is currently online-2023-09-21 16:22:21.426213
+root - WARNING - Bot is currently polling-2023-09-21 16:22:21.456000
+asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Application:6544496390:update_fetcher' coro=<Application._update_fetcher() running at E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py:1101> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+root - WARNING - Bot is currently online-2023-09-21 16:22:29.819350
+root - WARNING - Bot is currently polling-2023-09-21 16:22:29.843429
+root - WARNING - Bot is currently online-2023-09-21 16:22:42.576014
+root - WARNING - Bot is currently polling-2023-09-21 16:22:42.600016
+asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Application:6544496390:update_fetcher' coro=<Application._update_fetcher() running at E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py:1101> wait_for=<Future pending cb=[Task.task_wakeup()]>>

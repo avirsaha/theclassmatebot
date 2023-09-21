@@ -15,12 +15,14 @@
 # ==============================================================================
 """This is the main script of the bot"""
 
+from typing import Final
 
 __version__ = "0.1.0-alpha"
 __all__ = []
+EVENT_LOG_PATH: Final[str] = "logs/events.log"
+
 
 import database_interface
-from typing import Final
 from os import getenv
 from datetime import datetime
 from telegram import Update
@@ -31,28 +33,28 @@ from telegram.ext import (
     filters,
     ContextTypes,
 )
+from dotenv import load_dotenv
+from logging import error, warning, basicConfig, WARNING, ERROR, FileHandler, getLogger
+
 
 # Config for loading .env
-from dotenv import load_dotenv
-
 load_dotenv(
     dotenv_path=".env"
-)  # Create your own .env file at .venv before running this script.
-
-# Config for logging
-from logging import error, warning, basicConfig, WARNING, DEBUG
-
-basicConfig(
-    filename="logs/events.log",
-    filemode="w",
-    format="%(name)s - %(levelname)s - %(message)s",
-    level=WARNING,
-)
+)  # Create your own .env file the project root directory before running this script.
 
 
 # Getting API token and username from .env
 TOKEN: Final[str] = getenv("api_token_telegrambot")
 BOT_USERNAME: Final[str] = getenv("username_telegrambot")
+
+
+# Config for logging
+basicConfig(
+    filename=EVENT_LOG_PATH,
+    filemode="a",
+    format="%(name)s - %(levelname)s - %(message)s",
+    level=WARNING,
+)
 
 
 # Commands
@@ -164,7 +166,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     text: str = update.message.text
     response: str = handle_response(text)
 
-    warning("User:{}, :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
+    warning("User:{} :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
     await update.message.reply_text(response)
 
 
@@ -210,7 +212,12 @@ def main() -> None:
 
     # Polling
     warning("Bot is currently polling-{}".format(str(datetime.now())))
-    app.run_polling(poll_interval=3)
+    try:
+        app.run_polling(poll_interval=3)
+    except:
+        error("Bot is went offline-{}".format(str(datetime.now())))
+
+    error("Bot is went offline-{}".format(str(datetime.now())))
 
 
 if __name__ == "__main__":
