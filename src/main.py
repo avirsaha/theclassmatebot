@@ -58,7 +58,7 @@ basicConfig(
 )
 
 # Variables
-feedback = False  # Variable to switch between feedback mode and normal message handling mode
+feedback_mode: bool = False  # Variable to switch between feedback mode and normal message handling mode
 
 # Commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -146,9 +146,9 @@ async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 
 async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global feedback
-    feedback = True
-    await update.message.reply_text("Please write your feedback message")
+    global feedback_mode
+    feedback_mode = True
+    await update.message.reply_text("Please write your feedback message. You can also write \"cancel\" to cancel. Please do not share any sensitive info like email address, usernames etc.")
 
 async def enquary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
@@ -161,12 +161,16 @@ async def dev_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 # Function to record user feedback and store it in feedback.txt in feedback folder
 async def feedback_receive(update: Update, context: CallbackContext) -> None:  
     user_message = update.message.text
-    with open("Feedback/feedback.txt","a") as feedback_file:
-        feedback_file.write(f"\n{str(datetime.now())}: " + user_message)
-        feedback_file.close()
+    match str.lower(user_message):
+        case "cancel":
+            await update.message.reply_text("Exiting feedback mode. Please feel free to share your thoughts and feedback on the bot so we can continue to improve and deliver best possible services.")
+        case _:
+            with open("Feedback/feedback.txt","a") as feedback_file:
+                feedback_file.write(f"\n{str(datetime.now())}: " + user_message)
+            await update.message.reply_text("Thank you for your valuable feedback.")
                
-    global feedback
-    feedback = False
+    global feedback_mode
+    feedback_mode = False
 
 # Response Manager
 def handle_response(text: str) -> str:
@@ -180,13 +184,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     text: str = update.message.text
     response: str
 
-    if feedback:  # Condition to switch to feedback handling mode if set to True
-        await feedback_receive(update, context)  
-        return
-
-    response = handle_response(text)
-    warning("User:{} :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
-    await update.message.reply_text(response)
+    # Switches between feedback mode and message mode
+    match feedback_mode:
+        case True:
+            await feedback_receive(update, context)
+            return
+        case _ :
+            response = handle_response(text)
+            warning("User:{} :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
+            await update.message.reply_text(response)
 
 
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
