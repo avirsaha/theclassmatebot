@@ -32,6 +32,7 @@ from telegram.ext import (
     MessageHandler,
     filters,
     ContextTypes,
+    CallbackContext,
 )
 from dotenv import load_dotenv
 from logging import error, warning, basicConfig, WARNING, ERROR, FileHandler, getLogger
@@ -56,6 +57,8 @@ basicConfig(
     level=WARNING,
 )
 
+# Variables
+feedback = False  # Variable to switch between feedback mode and normal message handling mode
 
 # Commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -143,8 +146,9 @@ async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 
 async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("This feature is under development")
-
+    global feedback
+    feedback = True
+    await update.message.reply_text("Please write your feedback message")
 
 async def enquary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
@@ -153,6 +157,16 @@ async def enquary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def dev_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
 
+\
+# Function to record user feedback and store it in feedback.txt in feedback folder
+async def feedback_receive(update: Update, context: CallbackContext) -> None:  
+    user_message = update.message.text
+    with open("Feedback/feedback.txt","a") as feedback_file:
+        feedback_file.write(f"\n{str(datetime.now())}: " + user_message)
+        feedback_file.close()
+               
+    global feedback
+    feedback = False
 
 # Response Manager
 def handle_response(text: str) -> str:
@@ -164,8 +178,13 @@ def handle_response(text: str) -> str:
 # Message Manager
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text: str = update.message.text
-    response: str = handle_response(text)
+    response: str
 
+    if feedback:  # Condition to switch to feedback handling mode if set to True
+        await feedback_receive(update, context)  
+        return
+
+    response = handle_response(text)
     warning("User:{} :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
     await update.message.reply_text(response)
 
@@ -176,11 +195,13 @@ async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             update, context.error, str(datetime.now())
         )
     )
+    
 
 
 def main() -> None:
     warning("Bot is currently online-{}".format(str(datetime.now())))
 
+    global feedback
     app = Application.builder().token(TOKEN).build()
 
     # Command handlers
@@ -203,8 +224,8 @@ def main() -> None:
     app.add_handler(CommandHandler("feedback", feedback_command))
     app.add_handler(CommandHandler("enquiry", enquary_command))
     app.add_handler(CommandHandler("dev", dev_command))
-
-    # Message handlers
+    
+    # Message handlers 
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
     # Error handlers
