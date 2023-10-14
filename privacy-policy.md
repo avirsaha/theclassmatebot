@@ -1,11 +1,11 @@
 # Privacy Policy
 
-We take your privacy seriously. To better protect your privacy We provide this privacy policy notice explaining the way your personal information is collected and used.
+We take your privacy seriously. To better protect your privacy We provide this privacy policy notice explaining how your personal information is collected and used.
 
 
 ## Collection of Routine Information
 
-This bot tracks basic information about their users in authorized groups/channels/direct messages with the bot ONLY. This information includes, but is not limited to, User ID, User Messages, Timestamps, Feedback and User Input. The information is tracked and stored ONLY for routine administration, maintenance and service purposes.
+This bot tracks basic information about their users in authorized groups/channels/direct messages with the bot ONLY. This information includes but is not limited to, User ID, User Messages, Timestamps, Feedback, and User Input. The information is tracked and stored ONLY for routine administration, maintenance, and service purposes.
 
 
 ## Links to Third Party Websites
@@ -24,4 +24,4 @@ We reserve the right to update or change our Privacy Policy at any time and you 
 
 ## Contact Information
 
-For any questions or concerns regarding the privacy policy, please send us an email to [[Contact Email Address]].
+For any questions or concerns regarding the privacy policy, please send us an email to aviraj.saha@outlook.com.
