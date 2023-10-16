@@ -21,3 +21,15 @@ root - WARNING - Bot is currently online-2023-09-21 16:22:42.576014
 root - WARNING - Bot is currently polling-2023-09-21 16:22:42.600016
 asyncio - ERROR - Task was destroyed but it is pending!
 task: <Task pending name='Application:6544496390:update_fetcher' coro=<Application._update_fetcher() running at E:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py:1101> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+root - WARNING - Bot is currently online-2023-10-16 15:11:12.300267
+root - WARNING - Bot is currently polling-2023-10-16 15:11:12.864850
+root - WARNING - User:6310472157 :/contribution-2023-10-16 15:11:18.368909
+root - WARNING - Bot is currently online-2023-10-16 15:23:14.588049
+root - WARNING - Bot is currently polling-2023-10-16 15:23:14.619301
+root - WARNING - User:6310472157 :Hi-2023-10-16 15:23:56.961013
+root - WARNING - Bot is currently online-2023-10-16 15:27:44.581122
+root - WARNING - Bot is currently polling-2023-10-16 15:27:44.603262
+root - WARNING - Bot is currently online-2023-10-16 15:39:22.767614
+root - WARNING - Bot is currently polling-2023-10-16 15:39:22.789753
+root - WARNING - Bot is currently online-2023-10-16 15:42:12.797599
+root - WARNING - Bot is currently polling-2023-10-16 15:42:12.828854

@@ -21,8 +21,17 @@ __all__ = []
 import pyodbc
 
 
-def connection(username: str, address: str, passwd: str, database: str = None) -> None:
-    pass
+def connection(
+    username: str, address: str, passwd: str, database: str = None
+) -> tuple[bool, pyodbc.Connection | str]:
+    try:
+        connection: pyodbc.Connection = pyodbc.connect(
+            f"DRIVER={{SQL Server}};SERVER={address};DATABASE={database};UID={username};PWD={passwd}"
+        )
+        return True, connection
+
+    except pyodbc.Error as e:
+        return False, e
 
 
 # def search_record()

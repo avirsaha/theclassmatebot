@@ -26,6 +26,7 @@ Control the bot by sending the following commands:
     /enquiry: Ask questions.
     /open_source: Learn how it works.
     /dev: Access developer tools.
+    /cancel: Cancel most recent interaction.
 
 type /help for a furter assistance.
 
