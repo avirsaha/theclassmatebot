@@ -22,7 +22,6 @@ This should run on continuously on a server.
 
 ## Metadata
 - `Author:` Aviraj Saha, Maithil Saha
-- `Latest Update Date:` 2023-10-16 (YYYY-MM-DD)
 - `Purpose:` This module serves as the main script of the bot.
 """
 from typing import Final
