@@ -34,12 +34,13 @@ __all__ = []
 
 # Path alias
 EVENT_LOG_PATH: Final[str] = "logs/events.log"
-FEEDBACK_LOG_PATH: Final[str] = "feedback/feedback.txt"
+FEEDBACK_LOG_PATH: Final[str] = "user_messages/feedback.txt"
+ENQUIRY_LOG_PATH: Final[str] = "user_messages/enquiry.txt"
 
 
 # Mode variables
-feedback_mode: bool = (
-    False  # Variable to switch between feedback mode and normal message handling mode
+user_message_mode: str = (
+    None  # Variable to switch between the different text handling modes. Currently "Feedback", "Enquiry" and regular mode
 )
 
 
@@ -163,33 +164,38 @@ async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     with open("bot_responses/commands.txt", "r") as file:
         await update.message.reply_text(file.read())
 
-
+#Function to activate feedback mode to receive feedback
 async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global feedback_mode
-    feedback_mode = True
+    global user_message_mode
+    user_message_mode = "Feedback"
     await update.message.reply_text(
         'Please write your feedback message. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
     )
 
-
-async def enquary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("This feature is under development")
+# Function to activate enquiry mode to receive enquiries 
+async def enquiry_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global user_message_mode
+    user_message_mode = "Enquiry"
+    await update.message.reply_text(
+        'Please state your question. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
+        ' Our developers will get back to you within 1-3 working days. We apologize for any inconvenience caused in the meantime.'
+    )
 
 
 async def dev_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
 
-
+# Function to serve as a global cancel to cancel /enquiry and /feedback
 async def cancel_command(update: Update, context: CallbackContext) -> None:
-    global feedback_mode
-    if any((feedback_mode,)):
-        feedback_mode = False
+    global user_message_mode
+    if any((user_message_mode,)):
+        user_message_mode = None
         await update.message.reply_text("Canceled most recent interaction.")
         return
     await update.message.reply_text("No current interaction to cancel.")
 
 
-# Function to record user feedback and store it in feedback.txt in feedback folder
+# Function to record user feedback and store it in feedback.txt in user_messages folder
 async def feedback_receive(update: Update, context: CallbackContext) -> None:
     user_message = update.message.text
     match str.lower(user_message):
@@ -198,13 +204,28 @@ async def feedback_receive(update: Update, context: CallbackContext) -> None:
                 "Canceled feedback. Please feel free to share your thoughts and feedback on the bot so we can continue to improve and deliver best possible services."
             )
         case _:
-            with open("FEEDBACK_LOG_PATH", "a") as feedback_file:
+            with open(FEEDBACK_LOG_PATH, "a") as feedback_file:
                 feedback_file.write(f"\n{str(datetime.now())}: " + user_message)
             await update.message.reply_text("Thank you for your valuable feedback.")
 
-    global feedback_mode
-    feedback_mode = False
+    global user_message_mode
+    user_message_mode = None
+    
+# Function to record user enquiries and store it in enquiry.txt in user_messages folder
+async def enquiry_receive(update: Update, context: CallbackContext) -> None:
+    user_message = update.message.text
+    match str.lower(user_message):
+        case "cancel":
+            await update.message.reply_text(
+                "Canceled enquiry. Please feel free to reach out to us if you have any queries."
+            )
+        case _:
+            with open(ENQUIRY_LOG_PATH, "a") as enquiry_file:
+                enquiry_file.write(f"\n{str(datetime.now())}: {update.message.chat.username}: " + user_message)
+            await update.message.reply_text("Your enquiry has been noted. We will get back to you soon.")
 
+    global user_message_mode
+    user_message_mode = None
 
 # Response Manager
 def handle_response(text: str) -> str:
@@ -218,10 +239,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     text: str = update.message.text
     response: str
 
-    # Switches between feedback mode and message mode
-    match feedback_mode:
-        case True:
+    # Switches between feedback mode, enquiry mode and normal text mode
+    match user_message_mode:
+        case "Feedback":
             await feedback_receive(update, context)
+            return
+        case "Enquiry":
+            await enquiry_receive(update, context)
             return
         case _:
             response = handle_response(text)
@@ -266,7 +290,7 @@ def main() -> None:
     app.add_handler(CommandHandler("open_source", open_source_command))
     app.add_handler(CommandHandler("commands", commands_command))
     app.add_handler(CommandHandler("feedback", feedback_command))
-    app.add_handler(CommandHandler("enquiry", enquary_command))
+    app.add_handler(CommandHandler("enquiry", enquiry_command))
     app.add_handler(CommandHandler("dev", dev_command))
     app.add_handler(CommandHandler("cancel", cancel_command))
 
