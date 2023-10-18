@@ -28,3 +28,6 @@ We do not currently offer any rewards or bug bounty programs for security vulner
 - **Keep your dependencies up to date:** Regularly update dependencies and libraries to benefit from the latest security patches.
 - **Follow secure coding practices:** Write secure code and follow best practices for secure development.
 - **Stay informed:** Keep an eye on security-related announcements and updates from the project.
+
+---
+© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](LICENCE).

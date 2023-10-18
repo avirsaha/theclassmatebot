@@ -164,23 +164,34 @@ async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     with open("bot_responses/commands.txt", "r") as file:
         await update.message.reply_text(file.read())
 
-#Function to activate feedback mode to receive feedback
 async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """#### Function to activate feedback mode to receive feedback
+
+
+    - Args:
+        - update (Update)
+        - context (ContextTypes.DEFAULT_TYPE)
+    """
     global user_message_mode
     user_message_mode = "Feedback"
     await update.message.reply_text(
         'Please write your feedback message. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
     )
 
-# Function to activate enquiry mode to receive enquiries 
 async def enquiry_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """#### Function to activate enquiry mode to receive enquiries.
+
+
+    - Args:
+        - update (Update)
+        - context (ContextTypes.DEFAULT_TYPE)
+    """
     global user_message_mode
     user_message_mode = "Enquiry"
     await update.message.reply_text(
         'Please state your question. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
         ' Our developers will get back to you within 1-3 working days. We apologize for any inconvenience caused in the meantime.'
     )
-
 
 async def dev_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
@@ -195,8 +206,15 @@ async def cancel_command(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text("No current interaction to cancel.")
 
 
-# Function to record user feedback and store it in feedback.txt in user_messages folder
+# Mode functions
 async def feedback_receive(update: Update, context: CallbackContext) -> None:
+    """#### Function to record user feedback and store it in feedback.txt in user_messages folder
+
+
+    - Args:
+        - update (Update)
+        - context (CallbackContext)
+    """
     user_message = update.message.text
     match str.lower(user_message):
         case "cancel":
@@ -211,8 +229,15 @@ async def feedback_receive(update: Update, context: CallbackContext) -> None:
     global user_message_mode
     user_message_mode = None
     
-# Function to record user enquiries and store it in enquiry.txt in user_messages folder
 async def enquiry_receive(update: Update, context: CallbackContext) -> None:
+    """#### Function to record user enquiries and store it in enquiry.txt in user_messages folder
+
+
+
+    - Args:
+        - update (Update)
+        - context (CallbackContext)
+    """
     user_message = update.message.text
     match str.lower(user_message):
         case "cancel":
@@ -227,11 +252,13 @@ async def enquiry_receive(update: Update, context: CallbackContext) -> None:
     global user_message_mode
     user_message_mode = None
 
+
 # Response Manager
 def handle_response(text: str) -> str:
     processed_text = text.strip().lower()
-
-    return "Sorry, This bot is still unable to respond on messages. try typing '/' before your commands"
+    with open("bot_responses/default.txt", 'r') as file:
+        return file.read()
+    # return "Sorry, This bot is still unable to respond on messages. try typing '/' before your commands"
 
 
 # Message Manager
@@ -307,7 +334,7 @@ def main() -> None:
     except:
         error("Bot is went offline-{}".format(str(datetime.now())))
 
-    error("Bot is went offline-{}".format(str(datetime.now())))
+    error("Bot went offline-{}".format(str(datetime.now())))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,2 @@
+Sorry, This bot is still unable to respond on messages. try typing '/' before your commands. 
+Confused? Try /help or /commands.

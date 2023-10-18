@@ -14,7 +14,7 @@
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # ==============================================================================
 
-import main, database_interface
+from . import main, database_interface
 
 __version__ = "0.1.0-alpha"
 __all__ = ("main", "database_interface")

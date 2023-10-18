@@ -22,7 +22,7 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. We 
 
 ## Access Documentation
 
-Checkout our [README](../README.md) for any relevent information regarding the codebase that you may need to make your contribution to this project.
+Checkout our [README](README.md) for any relevent information regarding the codebase that you may need to make your contribution to this project.
 
 ## How to Contribute
 
@@ -54,7 +54,7 @@ Project maintainers will review your pull requests. Please be patient during the
 
 ## Code Style and Conventions
 
-Follow the project's code style and conventions as outlined in the project's documentation. Consistent coding practices make it easier to review and merge contributions. Check out our [Style Guidlines](STYLE_GUIDELINES.md) to discover more  about the coding style and convensions used in this project.
+Follow the project's code style and conventions as outlined in the project's documentation. Consistent coding practices make it easier to review and merge contributions. Check out our [Style Guidlines](./documentation/STYLE_GUIDELINES.md) to discover more  about the coding style and convensions used in this project.
 
 ## License
 
@@ -66,4 +66,4 @@ We appreciate your contributions and the time you've dedicated to improving [the
 
 
 ---
-© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](../LICENCE).
+© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](LICENCE).
