@@ -13,16 +13,37 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # ==============================================================================
-"""This is the main script of the bot"""
+"""# Bot Script
 
+This module serves as the main script of the bot.
+
+### Note: 
+This should run on continuously on a server.
+
+## Metadata
+- `Author:` Aviraj Saha, Maithil Saha
+- `Purpose:` This module serves as the main script of the bot.
+"""
 from typing import Final
 
+
+# Version and other technical data
 __version__ = "0.1.0-alpha"
 __all__ = []
+
+
+# Path alias
 EVENT_LOG_PATH: Final[str] = "logs/events.log"
+FEEDBACK_LOG_PATH: Final[str] = "feedback/feedback.txt"
 
 
-import database_interface
+# Mode variables
+feedback_mode: bool = (
+    False  # Variable to switch between feedback mode and normal message handling mode
+)
+
+
+# import database_interface
 from os import getenv
 from datetime import datetime
 from telegram import Update
@@ -57,8 +78,6 @@ basicConfig(
     level=WARNING,
 )
 
-# Variables
-feedback_mode: bool = False  # Variable to switch between feedback mode and normal message handling mode
 
 # Commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -148,7 +167,10 @@ async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global feedback_mode
     feedback_mode = True
-    await update.message.reply_text("Please write your feedback message. You can also write \"cancel\" to cancel. Please do not share any sensitive info like email address, usernames etc.")
+    await update.message.reply_text(
+        'Please write your feedback message. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
+    )
+
 
 async def enquary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
@@ -157,20 +179,32 @@ async def enquary_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def dev_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("This feature is under development")
 
-\
+
+async def cancel_command(update: Update, context: CallbackContext) -> None:
+    global feedback_mode
+    if any((feedback_mode,)):
+        feedback_mode = False
+        await update.message.reply_text("Canceled most recent interaction.")
+        return
+    await update.message.reply_text("No current interaction to cancel.")
+
+
 # Function to record user feedback and store it in feedback.txt in feedback folder
-async def feedback_receive(update: Update, context: CallbackContext) -> None:  
+async def feedback_receive(update: Update, context: CallbackContext) -> None:
     user_message = update.message.text
     match str.lower(user_message):
         case "cancel":
-            await update.message.reply_text("Exiting feedback mode. Please feel free to share your thoughts and feedback on the bot so we can continue to improve and deliver best possible services.")
+            await update.message.reply_text(
+                "Canceled feedback. Please feel free to share your thoughts and feedback on the bot so we can continue to improve and deliver best possible services."
+            )
         case _:
-            with open("Feedback/feedback.txt","a") as feedback_file:
+            with open("FEEDBACK_LOG_PATH", "a") as feedback_file:
                 feedback_file.write(f"\n{str(datetime.now())}: " + user_message)
             await update.message.reply_text("Thank you for your valuable feedback.")
-               
+
     global feedback_mode
     feedback_mode = False
+
 
 # Response Manager
 def handle_response(text: str) -> str:
@@ -189,19 +223,23 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         case True:
             await feedback_receive(update, context)
             return
-        case _ :
+        case _:
             response = handle_response(text)
-            warning("User:{} :{}-{}".format(update.message.chat.id, text, str(datetime.now())))
+            warning(
+                "User:{} :{}-{}".format(
+                    update.message.chat.id, text, str(datetime.now())
+                )
+            )
             await update.message.reply_text(response)
 
 
+# Error handler
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     error(
         "Update {} caused the following error {}-{}".format(
             update, context.error, str(datetime.now())
         )
     )
-    
 
 
 def main() -> None:
@@ -230,8 +268,9 @@ def main() -> None:
     app.add_handler(CommandHandler("feedback", feedback_command))
     app.add_handler(CommandHandler("enquiry", enquary_command))
     app.add_handler(CommandHandler("dev", dev_command))
-    
-    # Message handlers 
+    app.add_handler(CommandHandler("cancel", cancel_command))
+
+    # Message handlers
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
     # Error handlers

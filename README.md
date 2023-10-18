@@ -120,3 +120,7 @@ The Classmate Bot project would like to thank all contributors and users for the
 [Visit The Classmate Bot on GitHub](https://github.com/avirsaha/theclassmatebot)
 
 If you have any questions, feedback, or suggestions, please don't hesitate to reach out. We'd love to hear from you!
+
+
+---
+© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](../LICENCE).
