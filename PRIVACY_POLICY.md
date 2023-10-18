@@ -5,7 +5,7 @@ We take your privacy seriously. To better protect your privacy We provide this p
 
 ## Collection of Routine Information
 
-This bot tracks basic information about their users in authorized groups/channels/direct messages with the bot ONLY. This information includes but is not limited to, User ID, User Messages, Timestamps, Feedback, and User Input. The information is tracked and stored ONLY for routine administration, maintenance, and service purposes.
+This bot tracks basic information about their users in authorized groups/channels/direct messages with the bot ONLY. This information includes but is not limited to, Username, User ID, User Messages, Timestamps, Feedback, and User Input. The information is tracked and stored ONLY for routine administration, maintenance, and service purposes.
 
 
 ## Links to Third Party Websites
