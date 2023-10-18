@@ -33,9 +33,9 @@ def calculate_average(numbers: List[float]) -> float:
 
 # Bad
 def avg(nums: List[float]) -> float:
-    t = sum(nums)
-    c = len(nums)
-    return t / c
+    t=sum(nums)
+    c=len(nums)
+    return t/c
 ```
 
 <a name="type-annotations"></a>
