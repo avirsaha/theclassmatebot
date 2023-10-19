@@ -1,5 +1,10 @@
 # The Classmate Bot - Your Academic Superhero! 🤖📚
 
+## Authors
+
+- Aviraj Saha
+- Maithil Saha
+
 ## Overview
 
 Welcome to The Classmate Bot, your academic companion in the digital realm! Tired of hunting for study materials and notes when your classmates are unavailable? Fret not, as The Classmate Bot is here to save the day. This Telegram bot simplifies your academic journey by providing instant access to study materials, notes, and more, all in one place. Say goodbye to the stress of chasing down classmates or losing important files—let's make learning a breeze!
@@ -62,11 +67,6 @@ Type `/commands` for a comprehensive list of all commands and their functions. E
 ## License
 
 The Classmate Bot is distributed under the [GNU General Public License (GPL) version 3](https://www.gnu.org/licenses/gpl-3.0.txt). This means you are free to redistribute and modify the program under the terms of this license. Please refer to the [LICENSE](LICENSE) file for the full license text.
-
-## Authors
-
-- Aviraj Saha
-  - Email: aviraj.saha@outlook.com
 
 ## Contributing
 
