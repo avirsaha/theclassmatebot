@@ -30,4 +30,4 @@ We do not currently offer any rewards or bug bounty programs for security vulner
 - **Stay informed:** Keep an eye on security-related announcements and updates from the project.
 
 ---
-© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](LICENCE).
+© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](LICENSE).
