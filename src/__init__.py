@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # ==============================================================================
-
+"""Doc"""
 from . import main, database_interface
 
 __version__ = "0.1.0-alpha"

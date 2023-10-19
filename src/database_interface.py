@@ -15,6 +15,9 @@
 # ==============================================================================
 "This module interacts with the database"
 
+# PYLINT DIRECTIVES:
+# pylint: disable=line-too-long
+
 __version__ = "0.1.0-alpha"
 __all__ = []
 """
