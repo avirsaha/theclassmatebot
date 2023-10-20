@@ -1,4 +1,4 @@
-# Copyright 2023 Aviraj Saha
+# Copyright 2023 Aviraj Saha & Maithil Saha
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 This module serves as the main script of the bot.
 
 ### Note: 
-This should run on continuously on a server.
+This should run on a server.
 
 ## Metadata
 - `Author:` Aviraj Saha, Maithil Saha
@@ -33,28 +33,36 @@ This should run on continuously on a server.
 # pylint: disable=wrong-import-order
 # pylint: disable=bare-except
 # pylint: disable=function-redefined
+# pylint: disable=import-error
 
+# Intentionally wrongly ordered import statements.
 from typing import Final
+import json
 
 
-# Version and other technical data
-__version__ = "0.1.0-alpha"
-__all__ = []
+# Version and other meta data
+__version__: str = "0.1.0-alpha"
+__all__: list[str,] = []
 
+# Reading paths from JSON file
+with open("data/paths.json", "r", encoding="utf-8") as path_file:
+    data = path_file.read()
+PATHS: dict[str:str] = json.loads(data)
 
 # Path alias
-EVENT_LOG_PATH: Final[str] = "logs/events.log"
-FEEDBACK_LOG_PATH: Final[str] = "user_messages/feedback.txt"
-ENQUIRY_LOG_PATH: Final[str] = "user_messages/enquiry.txt"
+EVENT_LOG_PATH: Final[str] = PATHS["events_log"]
+# FEEDBACK_LOG_PATH: Final[str] = PATHS["feedback_file"] # Uncomment when needed.
+# ENQUIRY_LOG_PATH: Final[str] = PATHS["enquiry_file"]  # Uncomment when needed.
 
 
-# Mode variables
+# Mode variable
 user_message_mode: str = None  # Variable to switch between the different text handling modes. Currently "Feedback", "Enquiry" and regular mode
 
 
 # import database_interface
 from os import getenv
 from datetime import datetime
+from functools import partial
 from telegram import Update
 from telegram.ext import (
     Application,
@@ -62,8 +70,30 @@ from telegram.ext import (
     MessageHandler,
     filters,
     ContextTypes,
-    CallbackContext,
 )
+from commands import (
+    start_command,
+    help_command,
+    activate_command,
+    deactivate_command,
+    delete_command,
+    my_class_command,
+    contribute_command,
+    fetchname_command,
+    fetchdate_command,
+    fetchrange_command,
+    create_class_command,
+    delete_class_command,
+    join_class_command,
+    leave_class_command,
+    open_source_command,
+    commands_command,
+    feedback_command,
+    enquiry_command,
+    dev_command,
+    cancel_command,
+)
+from modes import feedback_receive, enquiry_receive
 from dotenv import load_dotenv
 from logging import error, warning, basicConfig, WARNING
 
@@ -88,335 +118,35 @@ basicConfig(
 )
 
 
-# Commands
-
-
-async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Start up prompt message.
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    with open("bot_responses/on_start.txt", "r", encoding="utf-8") as file:
-        await update.message.reply_text(file.read())
-
-
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Help manual for user.
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    with open("bot_responses/help.txt", "r", encoding="utf-8") as file:
-        await update.message.reply_text(file.read())
-
-
-async def activate_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    await update.message.reply_text("your record is started")
-
-
-async def deactivate_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    await update.message.reply_text("Your record is paused")
-
-
-async def delete_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    await update.message.reply_text("Your record is deleted")
-
-
-async def my_class_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    await update.message.reply_text("This feature is under development")
-
-
-async def contribute_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    await update.message.reply_text("This feature is under development")
-
-
-async def fetchname_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def fetchdate_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def fetchrange_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def create_class_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def delete_class_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def join_class_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def leave_class_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Not implimented
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    await update.message.reply_text("This feature is under development")
-
-
-async def open_source_command(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-) -> None:
-    """#### Open-source information
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-
-    with open("bot_responses/open_source.txt", "r", encoding="utf-8") as file:
-        await update.message.reply_text(file.read())
-
-
-async def commands_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Sends list of commands with description to the user.
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    with open("bot_responses/commands.txt", "r", encoding="utf-8") as file:
-        await update.message.reply_text(file.read())
-
-
-async def feedback_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Function to activate feedback mode to receive feedback
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
+# Callback functions
+def set_message_mode_callback(mode: str | None) -> None:
+    """Sets message mode
+    Args:
+        mode (str | None): Specify mode.
     """
     global user_message_mode
-    user_message_mode = "Feedback"
-    await update.message.reply_text(
-        'Please write your feedback message. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
-    )
+    user_message_mode = mode
 
 
-async def enquiry_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Function to activate enquiry mode to receive enquiries.
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
+def set_message_mode_callback_cancel() -> None:
+    """Sets message mode for cancelation"""
     global user_message_mode
-    user_message_mode = "Enquiry"
-    await update.message.reply_text(
-        'Please state your question. You can also write "cancel" or use command /cancel to cancel. Please do not share any sensitive info like email address, usernames etc.'
-        " Our developers will get back to you within 1-3 working days. We apologize for any inconvenience caused in the meantime."
-    )
-
-
-async def dev_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Developer features.
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    await update.message.reply_text("This feature is under development")
-
-
-async def cancel_command(update: Update, context: CallbackContext) -> None:
-    """#### Function to serve as a global cancel to cancel /enquiry and /feedback
-
-
-    - Args:
-        - update (Update)
-        - context (ContextTypes.DEFAULT_TYPE)
-    """
-    global user_message_mode
-    if any((user_message_mode,)):
+    if user_message_mode is not None:
         user_message_mode = None
-        await update.message.reply_text("Canceled most recent interaction.")
-        return
-    await update.message.reply_text("No current interaction to cancel.")
-
-
-# Mode functions
-async def feedback_receive(update: Update, context: CallbackContext) -> None:
-    """#### Function to record user feedback and store it in feedback.txt in user_messages folder
-
-
-    - Args:
-        - update (Update)
-        - context (CallbackContext)
-    """
-    user_message = update.message.text
-    match str.lower(user_message):
-        case "cancel":
-            await update.message.reply_text(
-                "Canceled feedback. Please feel free to share your thoughts and feedback on the bot so we can continue to improve and deliver best possible services."
-            )
-        case _:
-            with open(FEEDBACK_LOG_PATH, "a", encoding="utf-8") as feedback_file:
-                feedback_file.write(f"\n{str(datetime.now())}: " + user_message)
-            await update.message.reply_text("Thank you for your valuable feedback.")
-
-    global user_message_mode
-    user_message_mode = None
-
-
-async def enquiry_receive(update: Update, context: CallbackContext) -> None:
-    """#### Function to record user enquiries and store it in enquiry.txt in user_messages folder
-
-
-
-    - Args:
-        - update (Update)
-        - context (CallbackContext)
-    """
-    user_message = update.message.text
-    match str.lower(user_message):
-        case "cancel":
-            await update.message.reply_text(
-                "Canceled enquiry. Please feel free to reach out to us if you have any queries."
-            )
-        case _:
-            with open(ENQUIRY_LOG_PATH, "a", encoding="utf-8") as enquiry_file:
-                enquiry_file.write(
-                    f"\n{str(datetime.now())}: {update.message.chat.username}: "
-                    + user_message
-                )
-            await update.message.reply_text(
-                "Your enquiry has been noted. We will get back to you soon."
-            )
-
-    global user_message_mode
-    user_message_mode = None
+        return True
+    return False
 
 
 # Response Manager
 def handle_response(text: str) -> str:
     """Handles responses
-
     Args:
         text (str): Text send by user
 
     Returns:
         str: Bot response
     """
-    # processed_text = text.strip().lower()
+    # processed_text = text.strip().lower()  # Uncomment when used.
     with open("bot_responses/default.txt", "r", encoding="utf-8") as file:
         return file.read()
 
@@ -424,21 +154,19 @@ def handle_response(text: str) -> str:
 # Message Manager
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handles different messages
-
     Args:
         update (Update)
         context (ContextTypes.DEFAULT_TYPE)
     """
     text: str = update.message.text
     response: str
-
     # Switches between feedback mode, enquiry mode and normal text mode
     match user_message_mode:
         case "Feedback":
-            await feedback_receive(update, context)
+            await feedback_receive(update, context, set_message_mode_callback, text)
             return
         case "Enquiry":
-            await enquiry_receive(update, context)
+            await enquiry_receive(update, context, set_message_mode_callback, text)
             return
         case _:
             response = handle_response(text)
@@ -449,7 +177,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 # Error handler
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle errors
-
     Args:
         update (Update)
         context (ContextTypes.DEFAULT_TYPE)
@@ -482,10 +209,28 @@ def main() -> None:
     app.add_handler(CommandHandler("leave_class", leave_class_command))
     app.add_handler(CommandHandler("open_source", open_source_command))
     app.add_handler(CommandHandler("commands", commands_command))
-    app.add_handler(CommandHandler("feedback", feedback_command))
-    app.add_handler(CommandHandler("enquiry", enquiry_command))
+    app.add_handler(
+        CommandHandler(
+            "feedback",
+            partial(feedback_command, callback_function=set_message_mode_callback),
+        )  # Binds the command function with respective callback function/s.
+    )
+    app.add_handler(
+        CommandHandler(
+            "enquiry",
+            partial(enquiry_command, callback_function=set_message_mode_callback),
+        )  # Binds the command function with respective callback function/s.
+    )
     app.add_handler(CommandHandler("dev", dev_command))
-    app.add_handler(CommandHandler("cancel", cancel_command))
+    app.add_handler(
+        CommandHandler(
+            "cancel",
+            partial(
+                cancel_command,
+                callback_function=set_message_mode_callback_cancel,
+            ),
+        )  # Binds the command function with respective callback function/s.
+    )
 
     # Message handlers
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
@@ -494,6 +239,7 @@ def main() -> None:
     app.add_error_handler(error)
 
     # Polling
+    print("bot is online...")
     warning(f"Bot is currently polling-{str(datetime.now())}")
     try:
         app.run_polling(poll_interval=3)

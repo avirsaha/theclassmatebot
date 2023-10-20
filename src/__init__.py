@@ -1,4 +1,4 @@
-# Copyright 2023 Aviraj Saha
+# Copyright 2023 Aviraj Saha & Maithil Saha
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # ==============================================================================
 """Doc"""
-from . import main, database_interface
+from . import main, database_interface, commands, modes
 
 __version__ = "0.1.0-alpha"
-__all__ = ("main", "database_interface")
+__all__ = ("main", "database_interface", "commands", "modes")
