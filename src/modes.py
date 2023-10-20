@@ -37,7 +37,7 @@ from telegram.ext import CallbackContext
 
 
 # Reading paths from JSON file
-with open("data/paths.json", "r", encoding="utf-8") as path_file:
+with open("data/json/paths.json", "r", encoding="utf-8") as path_file:
     data = path_file.read()
 PATHS: dict[str:str] = json.loads(data)
 
