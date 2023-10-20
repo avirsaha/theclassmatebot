@@ -8,7 +8,7 @@
 ## Overview
 
 Welcome to The Classmate Bot, your academic companion in the digital realm! Tired of hunting for study materials and notes when your classmates are unavailable? Fret not, as The Classmate Bot is here to save the day. This Telegram bot simplifies your academic journey by providing instant access to study materials, notes, and more, all in one place. Say goodbye to the stress of chasing down classmates or losing important files—let's make learning a breeze!
-
+For a quick overview of the code base, please refer to the [Implementation Details](./documentation/IMPL_DETAILS.md).
 
 ## How it Works
 
@@ -122,4 +122,4 @@ If you have any questions, feedback, or suggestions, please don't hesitate to re
 
 
 ---
-© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](LICENSE).
+© 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](LICENSE) LICENSE.
