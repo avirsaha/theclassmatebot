@@ -93,7 +93,7 @@ from commands import (
     dev_command,
     cancel_command,
 )
-from modes import feedback_receive, enquiry_receive
+from modes import feedback_receive, enquiry_receive, activate_account
 from dotenv import load_dotenv
 from logging import error, warning, basicConfig, WARNING
 
@@ -168,6 +168,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         case "Enquiry":
             await enquiry_receive(update, context, set_message_mode_callback, text)
             return
+
+        case "Activate":
+            await activate_account(update, context, set_message_mode_callback, text)
+            return
         case _:
             response = handle_response(text)
             warning(f"User:{ update.message.chat.id} :{text}-{str(datetime.now())}")
@@ -195,7 +199,12 @@ def main() -> None:
     # Command handlers
     app.add_handler(CommandHandler("start", start_command))
     app.add_handler(CommandHandler("help", help_command))
-    app.add_handler(CommandHandler("activate", activate_command))
+    app.add_handler(
+        CommandHandler(
+            "activate",
+            partial(activate_command, callback_function=set_message_mode_callback),
+        )
+    )
     app.add_handler(CommandHandler("deactivate", deactivate_command))
     app.add_handler(CommandHandler("delete", delete_command))
     app.add_handler(CommandHandler("my_class", my_class_command))

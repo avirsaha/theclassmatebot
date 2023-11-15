@@ -61,13 +61,21 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         await update.message.reply_text(file.read())
 
 
-async def activate_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """#### Not implimented
+async def activate_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+    callback_function,
+) -> None:
+    """#### Database integration left
     - Args:
         - update (Update)
         - context (ContextTypes.DEFAULT_TYPE)
     """
-    await update.message.reply_text("your record is started")
+
+    callback_function("Activate")
+    await update.message.reply_text(
+        "The following information would be used as your credentials. Type 'ok' to confirm. you can also cancel by typing 'cancel' or use command /cancel"
+    )
 
 
 async def deactivate_command(

@@ -69,6 +69,24 @@ async def feedback_receive(
     callback_function(None)
 
 
+async def activate_account(
+    update: Update, context: CallbackContext, callback_function, user_message
+) -> None:
+    match user_message.strip().lower():
+        case "cancel":
+            await update.message.reply_text(
+                "Account activation has been canceled successfully!"
+            )
+        case _:
+            # Indirect database intervention.
+            await update.message.reply_text("Congrats! Account setup successful.")
+            await update.message.reply_text(
+                "You are all setup and good to join/create a class.\n Type in /profile to view your public profile and /edit to edit it."
+            )
+
+    callback_function(None)
+
+
 async def enquiry_receive(
     update: Update, context: CallbackContext, callback_function, user_message
 ) -> None:

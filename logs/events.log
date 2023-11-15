@@ -537,3 +537,62 @@ root - WARNING - User:6310472157 :Hi-2023-10-20 12:43:19.154561
 root - WARNING - Bot is currently online-2023-10-20 13:07:00.857493
 root - WARNING - Bot is currently polling-2023-10-20 13:07:00.898890
 root - WARNING - User:6310472157 :Hi-2023-10-20 13:07:24.807810
+root - WARNING - Bot is currently online-2023-11-14 18:38:54.511348
+root - WARNING - Bot is currently polling-2023-11-14 18:38:54.641481
+telegram.ext.Application - ERROR - An error was raised and an uncaught error was raised while handling the error with an error_handler.
+Traceback (most recent call last):
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1184, in process_update
+    await coroutine
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_basehandler.py", line 141, in handle_update
+    return await self.callback(update, context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: activate_command() missing 1 required positional argument: 'context'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1740, in process_error
+    await callback(update, context)
+  File "e:\Aviraj_python\theclassmatebot\src\main.py", line 188, in error
+    error(
+TypeError: error() missing 1 required positional argument: 'context'
+root - WARNING - User:6310472157 :Hi-2023-11-14 18:39:11.182015
+root - WARNING - Bot is currently online-2023-11-14 18:41:17.399459
+root - WARNING - Bot is currently polling-2023-11-14 18:41:17.425462
+telegram.ext.Application - ERROR - An error was raised and an uncaught error was raised while handling the error with an error_handler.
+Traceback (most recent call last):
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1184, in process_update
+    await coroutine
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_basehandler.py", line 141, in handle_update
+    return await self.callback(update, context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: activate_command() got multiple values for argument 'callback_function'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1740, in process_error
+    await callback(update, context)
+  File "e:\Aviraj_python\theclassmatebot\src\main.py", line 188, in error
+    error(
+TypeError: error() missing 1 required positional argument: 'context'
+telegram.ext.Application - ERROR - An error was raised and an uncaught error was raised while handling the error with an error_handler.
+Traceback (most recent call last):
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1184, in process_update
+    await coroutine
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_basehandler.py", line 141, in handle_update
+    return await self.callback(update, context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: activate_command() got multiple values for argument 'callback_function'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "e:\Aviraj_python\theclassmatebot\.venv\Lib\site-packages\telegram\ext\_application.py", line 1740, in process_error
+    await callback(update, context)
+  File "e:\Aviraj_python\theclassmatebot\src\main.py", line 188, in error
+    error(
+TypeError: error() missing 1 required positional argument: 'context'
+root - WARNING - Bot is currently online-2023-11-14 18:44:51.683046
+root - WARNING - Bot is currently polling-2023-11-14 18:44:51.714299
+root - WARNING - User:6310472157 :/profile-2023-11-14 18:45:50.483038
