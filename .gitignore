@@ -5,3 +5,4 @@
 __pycache__
 backup.yml
 .mypy_cache
+/logs

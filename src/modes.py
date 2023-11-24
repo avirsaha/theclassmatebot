@@ -75,11 +75,12 @@ async def activate_account(
     match user_message.strip().lower():
         case "cancel":
             await update.message.reply_text(
-                "Account activation has been canceled successfully!"
+                "Your account activation as been canceled, We did not store any of your information!\nYou may try /activate command to activate your account."
             )
         case _:
-            # Indirect database intervention.
-            await update.message.reply_text("Congrats! Account setup successful.")
+            await update.message.reply_text("Working on it.....")
+            # database interaction pass user_message
+            await update.message.reply_text("🎊Congrats! Account activation successful.")
             await update.message.reply_text(
                 "You are all setup and good to join/create a class.\n Type in /profile to view your public profile and /edit to edit it."
             )

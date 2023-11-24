@@ -20,7 +20,7 @@
 
 __version__ = "0.1.0-alpha"
 __all__ = []
-"""
+
 import pyodbc
 
 
@@ -37,5 +37,13 @@ def connection(
         return False, e
 
 
+CONN = connection(
+    username="theclassmatebot",
+    address="theclassmatebot.mysql.pythonanywhere-services.com",
+    passwd="cliX1234",
+    database="theclassmatebot$masterdb",
+)
+cursor = CONN.cursor()
+result = cursor.execute("show tables;")
+print(result)
 # def search_record()
-"""

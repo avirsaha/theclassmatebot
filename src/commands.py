@@ -73,8 +73,20 @@ async def activate_command(
     """
 
     callback_function("Activate")
+
     await update.message.reply_text(
-        "The following information would be used as your credentials. Type 'ok' to confirm. you can also cancel by typing 'cancel' or use command /cancel"
+        "\n".join(
+            [
+                "📜 The following information would be used as your credentials. Follow the instructions to confirm.",
+                "Note that the userID you see below is same as your current telegram userID. Feel free to change it later.\n\n"
+                f"✅ UserID = {update.message.chat.id}",
+                f"✅ Nickname = {update.message.chat.first_name}",
+                "\n📝 You can edit this data anytime you want.",
+            ],
+        )
+    )
+    await update.message.reply_text(
+        "🙈Type in your new password below. You can also cancel by typing 'cancel' or use command /cancel"
     )
 
 
