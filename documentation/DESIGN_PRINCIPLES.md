@@ -4,14 +4,14 @@
 
 ## Table of Contents
 
-- [Design Pattern](#design-pattern)
-- [Design Principles](#design-principles)
-  - [Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
-  - [Separation of Concerns (SoC)](#separation-of-concerns-soc)
-  - [Open/Closed Principle (OCP)](#openclosed-principle-ocp)
-  - [Don't Repeat Yourself (DRY)](#dont-repeat-yourself-dry)
-  - [Documentation and Comments](#documentation-and-comments)
-
+1. [Design Pattern](#design-pattern)
+2. [Design Principles](#design-principles)
+  - 1. [Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
+  - 2. [Separation of Concerns (SoC)](#separation-of-concerns-soc)
+  - 3. [Open/Closed Principle (OCP)](#openclosed-principle-ocp)
+  - 4. [Don't Repeat Yourself (DRY)](#dont-repeat-yourself-dry)
+  - 5. [Documentation and Comments](#documentation-and-comments)
+3. [Flow Diagram](#flow-diagram)
 ---
 <a name="design-pattern"></a>
 ## Design Pattern
@@ -75,6 +75,13 @@ For a detailed understanding of the specific configuration of the [SOLID](https:
 
 ![DOC](https://www.altexsoft.com/media/2017/12/122456457658699098-90-90909-0.png)
 
+
+<a name="flow-diagram"></a>
+## Flow Diagram
+
+This flow diagram delineates the program's flow, providing a conceptual overview. It does not elucidate the intricacies of the actual code structure but rather presents a logical representation of the program's flow.
+
+![FD](FLOW_DIAGRAM.jpg)
 
 ---
 © 2023 AVIRAJ SAHA & MAITHIL SAHA. THIS OPEN-SOURCE SOFTWARE IS LICENSED UNDER THE [GPLv3.0](../LICENCE).
