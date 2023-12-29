@@ -1,16 +1,13 @@
-DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS Customers;
-DROP TABLE IF EXISTS Shippings;
-DROP TABLE IF EXISTS UserMaster;
-DROP TABLE IF EXISTS ClassMaster;
-DROP TABLE IF EXISTS ClassRegister_class1;
-DROP TABLE IF EXISTS ClassData_class1;
+-- DROP TABLE IF EXISTS UserMaster;
+-- DROP TABLE IF EXISTS ClassMaster;
+-- DROP TABLE IF EXISTS DocumentPool;
+-- DROP TABLE IF EXISTS EventPool;
 
 
 -- Creating UserMaster
 CREATE TABLE IF NOT EXISTS UserMaster (
     Username INT UNSIGNED PRIMARY KEY,
-  	CurrentID INT UNSIGNED,
+  	 CurrentID INT UNSIGNED,
     Nickname VARCHAR(20) NOT NULL,
     Password VARBINARY(256) NOT NULL,
     ClassID INT UNSIGNED,
@@ -33,10 +30,10 @@ CREATE TABLE IF NOT EXISTS ClassMaster (
 CREATE TABLE IF NOT EXISTS DocumentPool (
     DocID INT UNSIGNED PRIMARY KEY,
     Docname VARCHAR(20) NOT NULL,
-  	Doc BLOB NOT NULL,
-  	ClassID INT UNSIGNED NOT NULL,
-  	Username INT UNSIGNED NOT NULL,
-  	Tags VARCHAR,
+  	 Doc BLOB NOT NULL,
+  	 ClassID INT UNSIGNED NOT NULL,
+  	 Username INT UNSIGNED NOT NULL,
+  	 Tags VARCHAR,
     Date_of_contrib DATE NOT NULL,
   	FOREIGN KEY (ClassID) REFERENCES ClassMaster(ClassID),
   	FOREIGN KEY (Username) REFERENCES UserMaster(Username)
@@ -47,9 +44,9 @@ CREATE TABLE IF NOT EXISTS DocumentPool (
 CREATE TABLE IF NOT EXISTS EventPool (
     EventID INT UNSIGNED PRIMARY KEY,
     Eventname VARCHAR(20) NOT NULL,
-  	ClassID INT UNSIGNED NOT NULL,
-  	Date_of_event DATE NOT NULL,
+  	 ClassID INT UNSIGNED NOT NULL,
+  	 Date_of_event DATE NOT NULL,
     Organizer VARCHAR,
-  	Status BIT,
-  	FOREIGN KEY (ClassID) REFERENCES ClassMaster(ClassID)
+  	 Status BIT,
+  	 FOREIGN KEY (ClassID) REFERENCES ClassMaster(ClassID)
 );
