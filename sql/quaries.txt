@@ -1,98 +1,55 @@
-drop table if exists Orders;
-drop table if exists Customers;
-drop table if exists Shippings;
-drop table if exists UserMaster;
-drop table if exists ClassMaster;
-drop table if exists ClassRegister_class1;
-drop table if exists ClassData_class1;
-
-
-
-
--- Creating ClassMaster
-create table if not exists ClassMaster(
-  classID varchar(30) not null,
-  class_code varchar(255) not null,
-  class_name varchar(60) not null,
-  origin_date date not null,
-  strength int not null,
-  register varchar(45) not null,
-  data varchar(45) not null,
-  admin_userID VARCHAR(30) NOT NULL,
-  primary key(classID)
-  -- foreign key (admin_userID) references UserMaster(userID)
-);
-
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Shippings;
+DROP TABLE IF EXISTS UserMaster;
+DROP TABLE IF EXISTS ClassMaster;
+DROP TABLE IF EXISTS ClassRegister_class1;
+DROP TABLE IF EXISTS ClassData_class1;
 
 
 -- Creating UserMaster
-create table if not exists UserMaster (
-  userID varchar(30) not null,  -- Same as the telegram user id by default.
-  passwd varchar(255) not null,  -- Hashed password (different from telegram).
-  nickname varchar(60) not null,
-  classID varchar(30),
-  badge varchar(30),
-  primary key(userID)
-);
-
--- Create table ClassRegister_class1
-create table if not exists ClassRegister_class1(
-  nickname varchar(60) not null,
-  userID varchar(30) not null,
-  contribution_status varchar(30),
-  class_badge varchar(30),
-  constraint fk_userID
-  	foreign key(userID)
-  	references UserMaster(userID)
-  );
-
--- Create table ClassData_class1
-create table if not exists ClassData_class1(
-  userID varchar(30) not null,
-  doc text not null,
-  submittion_date date not null,
-  doc_identifier varchar(255) not null,
-  doc_id varchar(255) not null,
-  primary key(doc_id)
+CREATE TABLE IF NOT EXISTS UserMaster (
+    Username INT UNSIGNED PRIMARY KEY,
+  	CurrentID INT UNSIGNED,
+    Nickname VARCHAR(20) NOT NULL,
+    Password VARBINARY(256) NOT NULL,
+    ClassID INT UNSIGNED,
+    Role VARCHAR(20),
+    Badge VARCHAR(20),
+    FOREIGN KEY (ClassID) REFERENCES ClassMaster(ClassID)
 );
 
 
--- Adding Mock Data
-insert into UserMaster( userID, passwd, nickname, ClassID, badge)
-values
-('avi','xyz', 'Aviraj', null, 'early_user'),
-('ana','ztz', 'Ananya', null,'early_user'),
-('dya','ztza', 'Daya', null,'early_user'),
-('an','ztaz', 'Anya', null,'early_user'),
-('za','zaza', 'ppa', null, null),
-('pr','zza', 'Prya', null, null);
-
-insert into ClassMaster( classID, class_code,class_name, origin_date, strength, register, data, admin_userID)
-values
-('class1','code1', 'my class','2023-09-19', 43, 'ClassRegister_class1', 'ClassData_class1', 'xyza'), 
-('class2','code2' ,'your class','2023-09-19', 3, 'ClassRegister_class2', 'ClassData_class2', 'xyzs'),
-('class3','code3', 'our class','2023-09-19', 0, 'ClassRegister_class3', 'ClassData_class3', 'zza');
+-- Creating ClassMaster
+CREATE TABLE IF NOT EXISTS ClassMaster (
+    ClassID INT UNSIGNED PRIMARY KEY,
+    Classname VARCHAR(20) NOT NULL,
+    Date_of_form DATE NOT NULL,
+    strength SMALLINT UNSIGNED
+);
 
 
-insert into ClassRegister_class1(nickname, userID, contribution_status, class_badge)
-values
-('Aviraj','avi','',''),
-('ana','ana','','');
-
-update UserMaster
-set classID = 'class1'
-where userID in ('avi', 'ana');
-
-
-
--- Search quaries
-select * from UserMaster 
-where userID ='za'and passwd = 'zaza';
-
-select * from ClassRegister_class1;
-
-select * from ClassMaster
-where classID = 'class1' and class_code = 'code1';
+-- Creating DocumentPool
+CREATE TABLE IF NOT EXISTS DocumentPool (
+    DocID INT UNSIGNED PRIMARY KEY,
+    Docname VARCHAR(20) NOT NULL,
+  	Doc BLOB NOT NULL,
+  	ClassID INT UNSIGNED NOT NULL,
+  	Username INT UNSIGNED NOT NULL,
+  	Tags VARCHAR,
+    Date_of_contrib DATE NOT NULL,
+  	FOREIGN KEY (ClassID) REFERENCES ClassMaster(ClassID),
+  	FOREIGN KEY (Username) REFERENCES UserMaster(Username)
+);
 
 
-
+-- Creating EventPool
+CREATE TABLE IF NOT EXISTS EventPool (
+    EventID INT UNSIGNED PRIMARY KEY,
+    Eventname VARCHAR(20) NOT NULL,
+  	ClassID INT UNSIGNED NOT NULL,
+  	Date_of_event DATE NOT NULL,
+    Organizer VARCHAR,
+  	Status BIT,
+  	FOREIGN KEY (ClassID) REFERENCES ClassMaster(ClassID)
+);
